@@ -2,7 +2,7 @@
   <h1>Minha Loja</h1>
   <p>Bem-vindo à nossa loja online!</p>
 
-  @if (cartService.quantidade() > 0) {
-    <p>🛒 Carrinho: {{ cartService.quantidade() }} itens</p>
+  @if (quantidadeNgRx() > 0) {
+    <p>🛒 Carrinho: {{ quantidadeNgRx() }} itens</p>
   }
 </header>

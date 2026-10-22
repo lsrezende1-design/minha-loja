@@ -1,7 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectorRef } from '@angular/core';
 import { ProductCard } from '../product-card/product-card';
 import { Product } from '../../services/product';
 import { Cart } from '../../services/cart';
+import { Store } from '@ngrx/store';
+import { adicionarProduto } from '../../store/cart/cart.actions';
 
 @Component({
   imports: [ProductCard],
@@ -12,6 +14,8 @@ import { Cart } from '../../services/cart';
 export class ProductList implements OnInit {
   private productService = inject(Product);
   private cartService = inject(Cart);
+  private store = inject(Store);
+  private cdr = inject(ChangeDetectorRef);
 
   produtos: any[] = [];
   carregando = true;
@@ -26,12 +30,14 @@ export class ProductList implements OnInit {
         this.produtos = dadosDaApi;
         this.carregando = false;
         this.erro = false;
+        this.cdr.markForCheck();
 
         console.log('Produtos recebidos:', dadosDaApi);
       },
       error: (erro) => {
         this.carregando = false;
         this.erro = true;
+        this.cdr.markForCheck();
 
         console.error('Erro ao carregar produtos:', erro);
       },
@@ -39,9 +45,8 @@ export class ProductList implements OnInit {
   }
 
   receberProduto(produto: any) {
-    this.cartService.adicionar(produto);
+    this.store.dispatch(adicionarProduto({ produto }));
 
-    console.log('Produto adicionado:', produto.title);
-    console.log('Quantidade no carrinho:', this.cartService.obterQuantidade());
+    console.log('Produto enviado ao NgRx:', produto.title);
   }
 }

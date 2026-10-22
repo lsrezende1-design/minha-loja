@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { Cart } from '../../services/cart';
+import { Store } from '@ngrx/store';
+import { selecionarQuantidade } from '../../store/cart/cart.selectors';
+
 @Component({
   imports: [],
   selector: 'app-header',
@@ -7,5 +9,7 @@ import { Cart } from '../../services/cart';
   templateUrl: './header.html',
 })
 export class Header {
-  cartService = inject(Cart);
+  private store = inject(Store);
+
+  quantidadeNgRx = this.store.selectSignal(selecionarQuantidade);
 }
