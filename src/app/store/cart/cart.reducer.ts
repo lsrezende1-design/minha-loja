@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { adicionarProduto } from './cart.actions';
+import { adicionarProduto, clearCart } from './cart.actions';
 
 export interface CartState {
   itens: any[];
@@ -15,5 +15,9 @@ export const cartReducer = createReducer(
   on(adicionarProduto, (estado, { produto }) => ({
     ...estado,
     itens: [...estado.itens, produto],
+  })),
+  on(clearCart, (estado) => ({
+    ...estado,
+    itens: [],
   })),
 );

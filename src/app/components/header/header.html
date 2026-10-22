@@ -4,5 +4,6 @@
 
   @if (quantidadeNgRx() > 0) {
     <p>🛒 Carrinho: {{ quantidadeNgRx() }} itens</p>
+    <button (click)="esvaziarCarrinho()">Esvaziar Carrinho</button>
   }
 </header>
