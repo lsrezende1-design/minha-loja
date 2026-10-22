@@ -1,0 +1,16 @@
+<article class="produto">
+  <h3>{{ produtoRecebido.title }}</h3>
+  <img [src]="produtoRecebido.image" [alt]="produtoRecebido.title" width="100" />
+
+  <p>
+    <s>
+      {{ produtoRecebido.price | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+    </s>
+  </p>
+
+  <p>
+    {{ produtoRecebido.price | discount: 10 | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+  </p>
+
+  <button (click)="clicouComprar()">Adicionar ao Carrinho</button>
+</article>

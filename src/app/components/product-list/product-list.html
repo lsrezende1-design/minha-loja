@@ -1,0 +1,19 @@
+<section>
+  <h2>Nossos Produtos</h2>
+  <p>Confira as novidades da nossa loja!</p>
+
+  @if (carregando) {
+    <p>Carregando produtos...</p>
+  } @else if (erro) {
+    <p>Não foi possível carregar os produtos. Tente novamente.</p>
+  } @else {
+    <div class="lista-produtos">
+      @for (produto of produtos; track produto.id) {
+        <app-product-card [produtoRecebido]="produto" (adicionar)="receberProduto($event)">
+        </app-product-card>
+      } @empty {
+        <p>Nenhum produto encontrado.</p>
+      }
+    </div>
+  }
+</section>

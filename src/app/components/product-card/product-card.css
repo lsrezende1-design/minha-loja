@@ -1,0 +1,21 @@
+.produto {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  text-align: center;
+  width: 220px;
+}
+
+.produto img {
+  height: 150px;
+  object-fit: contain;
+}
+
+.produto button {
+  background-color: #2563eb;
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+}
