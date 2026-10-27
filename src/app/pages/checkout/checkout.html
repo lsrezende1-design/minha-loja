@@ -1,0 +1,132 @@
+<section class="checkout">
+  <h2>Finalizar Compra</h2>
+
+  <p>Preencha seus dados para finalizar o pedido.</p>
+
+  <form [formGroup]="checkoutForm" (ngSubmit)="finalizarPedido()">
+    <label for="nome">Nome completo:</label>
+
+    <input id="nome" type="text" formControlName="nome" placeholder="Digite seu nome" />
+    @if (isCampoInvalido('nome')) {
+      <p style="color: red">Informe um nome com pelo menos 3 caracteres.</p>
+    }
+    <label for="email">E-mail:</label>
+
+    <input id="email" type="email" formControlName="email" placeholder="Digite seu e-mail" />
+
+    @if (isCampoInvalido('email')) {
+      <p style="color: red">Informe um e-mail válido.</p>
+    }
+    <label for="cep">CEP:</label>
+
+    <input id="cep" type="text" formControlName="cep" placeholder="00000-000" />
+
+    @if (isCampoInvalido('cep')) {
+      <p style="color: red">Informe um CEP no formato 00000-000.</p>
+    }
+    <label for="endereco">Endereço de entrega:</label>
+
+    <input id="endereco" type="text" formControlName="endereco" placeholder="Rua e omplemento" />
+
+    @if (isCampoInvalido('endereco')) {
+      <p style="color: red">Informe um endereço com pelo menos 5 caracteres.</p>
+    }
+    <label for="numero">Número do imóvel:</label>
+
+    <input id="numero" type="text" formControlName="numero" placeholder="Ex.: 123 ou s/n" />
+
+    @if (isCampoInvalido('numero')) {
+      <p style="color: red">Informe o número do imóvel ou S/N para endereços sem número.</p>
+    }
+    <label for="complemento">Complemento (opcional):</label>
+
+    <input
+      id="complemento"
+      type="text"
+      formControlName="complemento"
+      placeholder="Ex.: Apto 115, Bloco B, Fundos"
+    />
+    <label for="cidade">Cidade:</label>
+
+    <input id="cidade" type="text" formControlName="cidade" placeholder="Digite sua cidade" />
+
+    @if (isCampoInvalido('cidade')) {
+      <p style="color: red">Informe uma cidade com pelo menos 2 caracteres.</p>
+    }
+    <label for="estado">Estado (UF):</label>
+
+    <select id="estado" formControlName="estado">
+      <option value="">Selecione um estado</option>
+      <option value="AC">Acre</option>
+      <option value="AL">Alagoas</option>
+      <option value="AP">Amapá</option>
+      <option value="AM">Amazonas</option>
+      <option value="BA">Bahia</option>
+      <option value="CE">Ceará</option>
+      <option value="DF">Distrito Federal</option>
+      <option value="ES">Espírito Santo</option>
+      <option value="GO">Goiás</option>
+      <option value="MA">Maranhão</option>
+      <option value="MT">Mato Grosso</option>
+      <option value="MS">Mato Grosso do Sul</option>
+      <option value="MG">Minas Gerais</option>
+      <option value="PA">Pará</option>
+      <option value="PB">Paraíba</option>
+      <option value="PR">Paraná</option>
+      <option value="PE">Pernambuco</option>
+      <option value="PI">Piauí</option>
+      <option value="RJ">Rio de Janeiro</option>
+      <option value="RN">Rio Grande do Norte</option>
+      <option value="RS">Rio Grande do Sul</option>
+      <option value="RO">Rondônia</option>
+      <option value="RR">Roraima</option>
+      <option value="SC">Santa Catarina</option>
+      <option value="SP">São Paulo</option>
+      <option value="SE">Sergipe</option>
+      <option value="TO">Tocantins</option>
+    </select>
+
+    @if (isCampoInvalido('estado')) {
+      <p style="color: red">Selecione um estado.</p>
+    }
+
+    <h3>Dados de pagamento</h3>
+
+    <label for="numeroCartao">Número do cartão:</label>
+
+    <input
+      id="numeroCartao"
+      type="text"
+      inputmode="numeric"
+      maxlength="16"
+      formControlName="numeroCartao"
+      placeholder="16 dígitos"
+      autocomplete="off"
+    />
+
+    @if (isCampoInvalido('numeroCartao')) {
+      <p style="color: red">O número do cartão deve conter exatamente 16 dígitos.</p>
+    }
+
+    <label for="codigoSeguranca">Código de segurança:</label>
+
+    <input
+      id="codigoSeguranca"
+      type="text"
+      inputmode="numeric"
+      maxlength="3"
+      formControlName="codigoSeguranca"
+      placeholder="3 dígitos"
+      autocomplete="off"
+    />
+
+    @if (isCampoInvalido('codigoSeguranca')) {
+      <p style="color: red">O código de segurança deve conter exatamente 3 dígitos.</p>
+    }
+    <button type="submit">Finalizar Pedido</button>
+  </form>
+  @if (pedidoConcluido()) {
+    <p style="color: green">Pedido finalizado com sucesso!</p>
+  }
+  <a routerLink="/">Voltar para a loja</a>
+</section>

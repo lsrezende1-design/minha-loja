@@ -4,6 +4,7 @@
 
   @if (quantidadeNgRx() > 0) {
     <p>🛒 Carrinho: {{ quantidadeNgRx() }} itens</p>
+    <a routerLink="/checkout">Ir para o Checkout</a>
     <button (click)="esvaziarCarrinho()">Esvaziar Carrinho</button>
   }
 </header>
