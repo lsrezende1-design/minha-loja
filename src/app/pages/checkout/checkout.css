@@ -1,0 +1,304 @@
+/* ==================================
+   1. ESTRUTURA GERAL DO CHECKOUT
+================================== */
+
+.checkout {
+  max-width: 1450px;
+  margin: 30px auto;
+  padding: 0 20px;
+}
+
+.checkout h2 {
+  color: var(--cor-texto);
+  margin-bottom: 8px;
+}
+
+.checkout > p {
+  margin-bottom: 20px;
+}
+
+/* Duas colunas: formulário e resumo */
+
+.checkout-conteudo {
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.dados-compra {
+  min-width: 0;
+}
+
+.dados-compra > p {
+  margin-bottom: 12px;
+}
+
+/* ==================================
+   2. CARTÕES DO CHECKOUT
+================================== */
+
+.resumo-pedido,
+.checkout form {
+  background-color: white;
+  border: 1px solid var(--cor-borda);
+  border-radius: 10px;
+  padding: 25px;
+}
+
+/* Alinhamento das duas colunas */
+
+.checkout-conteudo .resumo-pedido {
+  margin-top: 36px;
+}
+
+.resumo-pedido h3,
+.checkout form h3 {
+  color: var(--cor-texto);
+  margin-bottom: 15px;
+}
+
+/* ==================================
+   3. FORMULÁRIO
+================================== */
+
+.linha-formulario {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px 16px;
+}
+
+.campo {
+  min-width: 0;
+}
+
+.checkout form h3 {
+  margin-top: 20px;
+  margin-bottom: 10px;
+}
+
+.checkout form h3:first-child {
+  margin-top: 0;
+}
+
+.checkout form label {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.checkout form input,
+.checkout form select {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid var(--cor-borda);
+  border-radius: 6px;
+  font: inherit;
+}
+
+.checkout form input:focus,
+.checkout form select:focus {
+  outline: 2px solid var(--cor-verde-claro);
+  border-color: var(--cor-verde);
+}
+
+.erro-campo {
+  color: #b42318;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.aviso-pagamento {
+  font-size: 12px;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+/* ==================================
+   4. BOTÃO FINALIZAR PEDIDO
+================================== */
+
+.checkout form button[type='submit'] {
+  display: block;
+  width: 100%;
+  margin-top: 20px;
+  padding: 12px;
+
+  background-color: #788c77;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 600;
+  opacity: 1;
+  visibility: visible;
+  cursor: pointer;
+}
+
+.checkout form button[type='submit']:hover {
+  background-color: #60745f;
+}
+
+.checkout form button[type='submit']:disabled {
+  background-color: #b8c4b4;
+  cursor: not-allowed;
+}
+
+/* ==================================
+   5. RESUMO DOS PRODUTOS
+================================== */
+
+.item-carrinho {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  border-bottom: 1px solid var(--cor-borda);
+  padding: 15px 0;
+}
+
+.item-carrinho img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+}
+
+.total-pedido {
+  text-align: right;
+  margin-top: 20px;
+  color: var(--cor-verde);
+}
+
+/* ==================================
+   6. CONTROLE DE QUANTIDADE
+================================== */
+
+.controle-quantidade {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--cor-borda);
+  border-radius: 8px;
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+.controle-quantidade button {
+  border: none;
+  background-color: var(--cor-verde-claro);
+  color: var(--cor-texto);
+  padding: 8px 13px;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.controle-quantidade button:hover {
+  background-color: #cbd8c6;
+}
+
+.controle-quantidade span {
+  min-width: 38px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* ==================================
+   7. LINKS
+================================== */
+
+.checkout a {
+  display: inline-block;
+  margin-top: 20px;
+  color: var(--cor-verde);
+  text-decoration: none;
+}
+
+.checkout a:hover {
+  text-decoration: underline;
+}
+
+/* ==================================
+   8. RESPONSIVIDADE
+================================== */
+
+/* Tablet: formulário e resumo empilhados */
+
+@media (max-width: 800px) {
+  .checkout-conteudo {
+    grid-template-columns: 1fr;
+  }
+
+  .checkout-conteudo .resumo-pedido {
+    margin-top: 0;
+  }
+}
+
+/* Celular: campos em uma coluna */
+
+@media (max-width: 700px) {
+  .linha-formulario {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .item-carrinho {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .item-carrinho img {
+    width: 75px;
+    height: 75px;
+  }
+
+  .resumo-pedido,
+  .checkout form {
+    padding: 16px;
+  }
+}
+.aviso-formulario {
+  color: #9a442d;
+  background-color: #fff1e9;
+  padding: 10px;
+  border-radius: 6px;
+  font-size: 13px;
+  margin-top: 15px;
+}
+/* Texto realmente digitado pelo usuário */
+.checkout form input,
+.checkout form select {
+  color: #343d35;
+  background-color: #ffffff;
+}
+
+/* Exemplos e orientações dos campos vazios */
+.checkout form input::placeholder {
+  color: #9ca3af;
+  opacity: 1;
+  font-style: italic;
+}
+
+/* Destaque quando o usuário seleciona o campo */
+.checkout form input:focus,
+.checkout form select:focus {
+  background-color: #ffffff;
+  border-color: #788c77;
+}
+.checkout .botao-voltar {
+  display: inline-block;
+  margin-top: 24px;
+  padding: 12px 20px;
+  background-color: var(--cor-verde);
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.checkout .botao-voltar:hover {
+  background-color: #60745f;
+  color: white;
+  text-decoration: none;
+}

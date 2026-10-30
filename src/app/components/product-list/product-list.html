@@ -1,6 +1,35 @@
-<section>
+<section class="vitrine">
   <h2>Nossos Produtos</h2>
   <p>Confira as novidades da nossa loja!</p>
+
+  <!-- Pesquisa reativa -->
+  <div class="area-busca">
+    <input
+      type="search"
+      [formControl]="campoBusca"
+      placeholder="O que você está procurando?"
+      aria-label="Pesquisar produtos"
+    />
+  </div>
+  <div class="categorias">
+    <button
+      type="button"
+      [class.ativa]="categoriaSelecionada === 'todos'"
+      (click)="selecionarCategoria('todos')"
+    >
+      Todos
+    </button>
+
+    @for (grupo of categoriasPrincipais; track grupo.id) {
+      <button
+        type="button"
+        [class.ativa]="categoriaSelecionada === grupo.id"
+        (click)="selecionarCategoria(grupo.id)"
+      >
+        {{ grupo.nome }}
+      </button>
+    }
+  </div>
 
   @if (carregando) {
     <p>Carregando produtos...</p>
@@ -8,7 +37,7 @@
     <p>Não foi possível carregar os produtos. Tente novamente.</p>
   } @else {
     <div class="lista-produtos">
-      @for (produto of produtos; track produto.id) {
+      @for (produto of produtosFiltrados; track produto.id) {
         <app-product-card [produtoRecebido]="produto" (adicionar)="receberProduto($event)">
         </app-product-card>
       } @empty {

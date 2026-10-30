@@ -1,10 +1,12 @@
 <header>
-  <h1>Minha Loja</h1>
-  <p>Bem-vindo à nossa loja online!</p>
+  <h1>essência.</h1>
+
+  <nav>
+    <a routerLink="/">Início</a>
+    <a routerLink="/checkout"> 🛒 Carrinho ({{ quantidadeNgRx() }}) </a>
+  </nav>
 
   @if (quantidadeNgRx() > 0) {
-    <p>🛒 Carrinho: {{ quantidadeNgRx() }} itens</p>
-    <a routerLink="/checkout">Ir para o Checkout</a>
-    <button (click)="esvaziarCarrinho()">Esvaziar Carrinho</button>
+    <button (click)="esvaziarCarrinho()">Esvaziar</button>
   }
 </header>

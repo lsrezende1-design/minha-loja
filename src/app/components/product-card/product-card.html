@@ -1,6 +1,15 @@
 <article class="produto">
-  <h3>{{ produtoRecebido.title }}</h3>
-  <img [src]="produtoRecebido.image" [alt]="produtoRecebido.title" width="100" />
+  <a [routerLink]="['/produto', produtoRecebido.id]" class="link-produto">
+    <h3>{{ produtoRecebido.title }}</h3>
+  </a>
+
+  <span class="desconto">
+    {{ produtoRecebido.discountPercentage | number: '1.0-2' : 'pt-BR' }}% OFF
+  </span>
+
+  <a [routerLink]="['/produto', produtoRecebido.id]" class="link-produto">
+    <img [src]="produtoRecebido.thumbnail" [alt]="produtoRecebido.title" />
+  </a>
 
   <p>
     <s>
@@ -9,8 +18,12 @@
   </p>
 
   <p>
-    {{ produtoRecebido.price | discount: 10 | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+    {{
+      produtoRecebido.price
+        | discount: produtoRecebido.discountPercentage
+        | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR'
+    }}
   </p>
 
-  <button (click)="clicouComprar()">Adicionar ao Carrinho</button>
+  <button type="button" (click)="clicouComprar()">Adicionar ao Carrinho</button>
 </article>

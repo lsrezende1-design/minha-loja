@@ -1,0 +1,33 @@
+header {
+  background: white;
+  padding: 20px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+h1 {
+  color: var(--cor-verde);
+  font-size: 28px;
+}
+
+nav {
+  display: flex;
+  gap: 20px;
+}
+
+a {
+  color: var(--cor-texto);
+  text-decoration: none;
+}
+
+button {
+  background: var(--cor-verde-claro);
+  color: var(--cor-texto);
+  border: none;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}

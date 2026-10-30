@@ -1,132 +1,341 @@
 <section class="checkout">
-  <h2>Finalizar Compra</h2>
+  @if (!pedidoConcluido()) {
+    <h2>Finalizar Compra</h2>
 
-  <p>Preencha seus dados para finalizar o pedido.</p>
+    <div class="checkout-conteudo">
+      <!-- COLUNA ESQUERDA: FORMULÁRIO -->
 
-  <form [formGroup]="checkoutForm" (ngSubmit)="finalizarPedido()">
-    <label for="nome">Nome completo:</label>
+      <div class="dados-compra">
+        <p>Preencha seus dados para finalizar o pedido.</p>
 
-    <input id="nome" type="text" formControlName="nome" placeholder="Digite seu nome" />
-    @if (isCampoInvalido('nome')) {
-      <p style="color: red">Informe um nome com pelo menos 3 caracteres.</p>
+        <form [formGroup]="checkoutForm" (ngSubmit)="finalizarPedido()">
+          <h3>Dados pessoais</h3>
+
+          <div class="linha-formulario">
+            <div class="campo">
+              <label for="nome">Nome completo:</label>
+
+              <input id="nome" type="text" formControlName="nome" placeholder="Digite seu nome" />
+
+              @if (isCampoInvalido('nome')) {
+                <p class="erro-campo">Informe um nome com pelo menos 3 caracteres.</p>
+              }
+            </div>
+
+            <div class="campo">
+              <label for="email">E-mail:</label>
+
+              <input
+                id="email"
+                type="email"
+                formControlName="email"
+                placeholder="Digite seu e-mail"
+              />
+
+              @if (isCampoInvalido('email')) {
+                <p class="erro-campo">Informe um e-mail válido.</p>
+              }
+            </div>
+          </div>
+
+          <h3>Endereço de entrega</h3>
+
+          <div class="linha-formulario">
+            <div class="campo">
+              <label for="cep">CEP:</label>
+
+              <input id="cep" type="text" formControlName="cep" placeholder="00000-000" />
+
+              @if (isCampoInvalido('cep')) {
+                <p class="erro-campo">Informe um CEP no formato 00000-000.</p>
+              }
+            </div>
+
+            <div class="campo">
+              <label for="numero">Número do imóvel:</label>
+
+              <input
+                id="numero"
+                type="text"
+                formControlName="numero"
+                placeholder="Ex.: 123 ou S/N"
+              />
+
+              @if (isCampoInvalido('numero')) {
+                <p class="erro-campo">Informe o número do imóvel ou S/N.</p>
+              }
+            </div>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="campo">
+              <label for="endereco">Endereço:</label>
+
+              <input
+                id="endereco"
+                type="text"
+                formControlName="endereco"
+                placeholder="Rua ou avenida"
+              />
+
+              @if (isCampoInvalido('endereco')) {
+                <p class="erro-campo">Informe um endereço com pelo menos 5 caracteres.</p>
+              }
+            </div>
+
+            <div class="campo">
+              <label for="complemento">Complemento (opcional):</label>
+
+              <input
+                id="complemento"
+                type="text"
+                formControlName="complemento"
+                placeholder="Ex.: Apto 115, Bloco B"
+              />
+            </div>
+          </div>
+
+          <div class="linha-formulario">
+            <div class="campo">
+              <label for="cidade">Cidade:</label>
+
+              <input
+                id="cidade"
+                type="text"
+                formControlName="cidade"
+                placeholder="Digite sua cidade"
+              />
+
+              @if (isCampoInvalido('cidade')) {
+                <p class="erro-campo">Informe uma cidade com pelo menos 2 caracteres.</p>
+              }
+            </div>
+
+            <div class="campo">
+              <label for="estado">Estado (UF):</label>
+
+              <select id="estado" formControlName="estado">
+                <option value="">Selecione um estado</option>
+
+                <option value="AC">Acre</option>
+
+                <option value="AL">Alagoas</option>
+
+                <option value="AP">Amapá</option>
+
+                <option value="AM">Amazonas</option>
+
+                <option value="BA">Bahia</option>
+
+                <option value="CE">Ceará</option>
+
+                <option value="DF">Distrito Federal</option>
+
+                <option value="ES">Espírito Santo</option>
+
+                <option value="GO">Goiás</option>
+
+                <option value="MA">Maranhão</option>
+
+                <option value="MT">Mato Grosso</option>
+
+                <option value="MS">Mato Grosso do Sul</option>
+
+                <option value="MG">Minas Gerais</option>
+
+                <option value="PA">Pará</option>
+
+                <option value="PB">Paraíba</option>
+
+                <option value="PR">Paraná</option>
+
+                <option value="PE">Pernambuco</option>
+
+                <option value="PI">Piauí</option>
+
+                <option value="RJ">Rio de Janeiro</option>
+
+                <option value="RN">Rio Grande do Norte</option>
+
+                <option value="RS">Rio Grande do Sul</option>
+
+                <option value="RO">Rondônia</option>
+
+                <option value="RR">Roraima</option>
+
+                <option value="SC">Santa Catarina</option>
+
+                <option value="SP">São Paulo</option>
+
+                <option value="SE">Sergipe</option>
+
+                <option value="TO">Tocantins</option>
+              </select>
+
+              @if (isCampoInvalido('estado')) {
+                <p class="erro-campo">Selecione um estado.</p>
+              }
+            </div>
+          </div>
+
+          <h3>Dados de pagamento</h3>
+
+          <p class="aviso-pagamento">
+            Pagamento simulado para fins acadêmicos. Use apenas dados fictícios.
+          </p>
+
+          <div class="linha-formulario">
+            <div class="campo">
+              <label for="numeroCartao">Número do cartão:</label>
+
+              <input
+                id="numeroCartao"
+                type="text"
+                inputmode="numeric"
+                maxlength="16"
+                formControlName="numeroCartao"
+                placeholder="16 dígitos fictícios"
+                autocomplete="off"
+              />
+
+              @if (isCampoInvalido('numeroCartao')) {
+                <p class="erro-campo">O número do cartão deve conter exatamente 16 dígitos.</p>
+              }
+            </div>
+
+            <div class="campo">
+              <label for="codigoSeguranca">Código de segurança:</label>
+
+              <input
+                id="codigoSeguranca"
+                type="text"
+                inputmode="numeric"
+                maxlength="3"
+                formControlName="codigoSeguranca"
+                placeholder="3 dígitos fictícios"
+                autocomplete="off"
+              />
+
+              @if (isCampoInvalido('codigoSeguranca')) {
+                <p class="erro-campo">O código de segurança deve conter exatamente 3 dígitos.</p>
+              }
+            </div>
+          </div>
+
+          @if (checkoutForm.invalid) {
+            <p class="aviso-formulario">
+              Confira os campos obrigatórios para finalizar sua compra.
+            </p>
+          }
+
+          <button type="submit" [disabled]="checkoutForm.invalid || quantidadeItens() === 0">
+            Finalizar Pedido
+          </button>
+        </form>
+      </div>
+
+      <!-- COLUNA DIREITA: RESUMO -->
+
+      <section class="resumo-pedido">
+        <h3>Resumo do pedido</h3>
+
+        <p>Quantidade de produtos: {{ quantidadeItens() }}</p>
+
+        @if (quantidadeItens() === 0) {
+          <p>Seu carrinho está vazio.</p>
+        } @else {
+          @for (produto of itensAgrupados(); track produto.id) {
+            <article class="item-carrinho">
+              <img [src]="produto.thumbnail" [alt]="produto.title" />
+
+              <div>
+                <h4>{{ produto.title }}</h4>
+
+                <div class="controle-quantidade">
+                  <button
+                    type="button"
+                    (click)="removerDoCarrinho(produto.id)"
+                    aria-label="Diminuir quantidade"
+                  >
+                    −
+                  </button>
+
+                  <span>{{ produto.quantidade }}</span>
+
+                  <button
+                    type="button"
+                    (click)="aumentarQuantidade(produto)"
+                    aria-label="Aumentar quantidade"
+                  >
+                    +
+                  </button>
+                </div>
+
+                <p>
+                  <s>
+                    {{ produto.price | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+                  </s>
+                </p>
+
+                <p>
+                  Preço unitário:
+
+                  {{
+                    produto.price
+                      | discount: produto.discountPercentage
+                      | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR'
+                  }}
+                </p>
+
+                <p>
+                  Subtotal:
+
+                  {{
+                    (produto.price | discount: produto.discountPercentage) * produto.quantidade
+                      | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR'
+                  }}
+                </p>
+              </div>
+            </article>
+          }
+
+          <div class="total-pedido">
+            <h3>
+              Total da compra:
+
+              {{ totalCompra() | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+            </h3>
+          </div>
+        }
+      </section>
+    </div>
+  } @else {
+    @if (resumoCompra(); as pedido) {
+      <section class="confirmacao-pedido">
+        <h3>Pedido realizado com sucesso! 🌿</h3>
+
+        <p>Obrigada pela compra, {{ pedido.nome }}!</p>
+
+        <p>Uma confirmação seria enviada para {{ pedido.email }}.</p>
+
+        <h4>Resumo da sua compra</h4>
+
+        @for (produto of pedido.produtos; track $index) {
+          <p>{{ produto.nome }} — Quantidade: {{ produto.quantidade }}</p>
+        }
+
+        <p>Total de itens: {{ pedido.quantidade }}</p>
+
+        <strong>
+          Valor total:
+
+          {{ pedido.total | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+        </strong>
+
+        <p>Esta é uma compra simulada para fins acadêmicos.</p>
+      </section>
     }
-    <label for="email">E-mail:</label>
-
-    <input id="email" type="email" formControlName="email" placeholder="Digite seu e-mail" />
-
-    @if (isCampoInvalido('email')) {
-      <p style="color: red">Informe um e-mail válido.</p>
-    }
-    <label for="cep">CEP:</label>
-
-    <input id="cep" type="text" formControlName="cep" placeholder="00000-000" />
-
-    @if (isCampoInvalido('cep')) {
-      <p style="color: red">Informe um CEP no formato 00000-000.</p>
-    }
-    <label for="endereco">Endereço de entrega:</label>
-
-    <input id="endereco" type="text" formControlName="endereco" placeholder="Rua e omplemento" />
-
-    @if (isCampoInvalido('endereco')) {
-      <p style="color: red">Informe um endereço com pelo menos 5 caracteres.</p>
-    }
-    <label for="numero">Número do imóvel:</label>
-
-    <input id="numero" type="text" formControlName="numero" placeholder="Ex.: 123 ou s/n" />
-
-    @if (isCampoInvalido('numero')) {
-      <p style="color: red">Informe o número do imóvel ou S/N para endereços sem número.</p>
-    }
-    <label for="complemento">Complemento (opcional):</label>
-
-    <input
-      id="complemento"
-      type="text"
-      formControlName="complemento"
-      placeholder="Ex.: Apto 115, Bloco B, Fundos"
-    />
-    <label for="cidade">Cidade:</label>
-
-    <input id="cidade" type="text" formControlName="cidade" placeholder="Digite sua cidade" />
-
-    @if (isCampoInvalido('cidade')) {
-      <p style="color: red">Informe uma cidade com pelo menos 2 caracteres.</p>
-    }
-    <label for="estado">Estado (UF):</label>
-
-    <select id="estado" formControlName="estado">
-      <option value="">Selecione um estado</option>
-      <option value="AC">Acre</option>
-      <option value="AL">Alagoas</option>
-      <option value="AP">Amapá</option>
-      <option value="AM">Amazonas</option>
-      <option value="BA">Bahia</option>
-      <option value="CE">Ceará</option>
-      <option value="DF">Distrito Federal</option>
-      <option value="ES">Espírito Santo</option>
-      <option value="GO">Goiás</option>
-      <option value="MA">Maranhão</option>
-      <option value="MT">Mato Grosso</option>
-      <option value="MS">Mato Grosso do Sul</option>
-      <option value="MG">Minas Gerais</option>
-      <option value="PA">Pará</option>
-      <option value="PB">Paraíba</option>
-      <option value="PR">Paraná</option>
-      <option value="PE">Pernambuco</option>
-      <option value="PI">Piauí</option>
-      <option value="RJ">Rio de Janeiro</option>
-      <option value="RN">Rio Grande do Norte</option>
-      <option value="RS">Rio Grande do Sul</option>
-      <option value="RO">Rondônia</option>
-      <option value="RR">Roraima</option>
-      <option value="SC">Santa Catarina</option>
-      <option value="SP">São Paulo</option>
-      <option value="SE">Sergipe</option>
-      <option value="TO">Tocantins</option>
-    </select>
-
-    @if (isCampoInvalido('estado')) {
-      <p style="color: red">Selecione um estado.</p>
-    }
-
-    <h3>Dados de pagamento</h3>
-
-    <label for="numeroCartao">Número do cartão:</label>
-
-    <input
-      id="numeroCartao"
-      type="text"
-      inputmode="numeric"
-      maxlength="16"
-      formControlName="numeroCartao"
-      placeholder="16 dígitos"
-      autocomplete="off"
-    />
-
-    @if (isCampoInvalido('numeroCartao')) {
-      <p style="color: red">O número do cartão deve conter exatamente 16 dígitos.</p>
-    }
-
-    <label for="codigoSeguranca">Código de segurança:</label>
-
-    <input
-      id="codigoSeguranca"
-      type="text"
-      inputmode="numeric"
-      maxlength="3"
-      formControlName="codigoSeguranca"
-      placeholder="3 dígitos"
-      autocomplete="off"
-    />
-
-    @if (isCampoInvalido('codigoSeguranca')) {
-      <p style="color: red">O código de segurança deve conter exatamente 3 dígitos.</p>
-    }
-    <button type="submit">Finalizar Pedido</button>
-  </form>
-  @if (pedidoConcluido()) {
-    <p style="color: green">Pedido finalizado com sucesso!</p>
   }
-  <a routerLink="/">Voltar para a loja</a>
+
+  <a routerLink="/" class="botao-voltar"> ← Voltar para a loja </a>
 </section>

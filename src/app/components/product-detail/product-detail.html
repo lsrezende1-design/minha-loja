@@ -1,0 +1,47 @@
+<section class="detalhes-produto">
+  <a routerLink="/" class="botao-voltar"> ← Voltar para a loja </a>
+  @if (carregando) {
+    <p>Carregando informações do produto...</p>
+  } @else if (erro) {
+    <p>Não foi possível carregar este produto.</p>
+  } @else if (produto) {
+    <div class="produto-conteudo">
+      <div class="produto-imagem">
+        <img [src]="produto.thumbnail" [alt]="produto.title" />
+      </div>
+
+      <div class="produto-informacoes">
+        <p class="produto-categoria">{{ produto.category }}</p>
+
+        <h2>{{ produto.title }}</h2>
+
+        <p>{{ produto.description }}</p>
+
+        <div class="produto-precos">
+          <p>
+            De:
+            <s>
+              {{ produto.price | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR' }}
+            </s>
+          </p>
+
+          <p>
+            Desconto de
+            {{ produto.discountPercentage | number: '1.0-1' }}%
+          </p>
+
+          <p class="produto-preco">
+            Por:
+            {{
+              produto.price
+                | discount: produto.discountPercentage
+                | currency: 'BRL' : 'symbol' : '1.2-2' : 'pt-BR'
+            }}
+          </p>
+        </div>
+
+        <button type="button" (click)="adicionarAoCarrinho()">Adicionar ao carrinho</button>
+      </div>
+    </div>
+  }
+</section>
