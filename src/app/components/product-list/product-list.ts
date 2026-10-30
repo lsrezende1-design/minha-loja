@@ -5,6 +5,7 @@ import { Store } from '@ngrx/store';
 import { adicionarProduto } from '../../store/cart/cart.actions';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { IProduct } from '../../models/iproduct';
 @Component({
   imports: [ProductCard, ReactiveFormsModule],
   selector: 'app-product-list',
@@ -16,12 +17,12 @@ export class ProductList implements OnInit {
   private store = inject(Store);
   private cdr = inject(ChangeDetectorRef);
 
-  produtos: any[] = [];
+  produtos: IProduct[] = [];
   carregando = true;
   erro = false;
   campoBusca = new FormControl('', { nonNullable: true });
 
-  produtosFiltrados: any[] = [];
+  produtosFiltrados: IProduct[] = [];
 
   categoriaSelecionada = 'todos';
 
@@ -107,7 +108,8 @@ export class ProductList implements OnInit {
 
     this.cdr.markForCheck();
   }
-  receberProduto(produto: any) {
+
+  receberProduto(produto: IProduct): void {
     this.store.dispatch(adicionarProduto({ produto }));
 
     console.log('Produto enviado ao NgRx:', produto.title);

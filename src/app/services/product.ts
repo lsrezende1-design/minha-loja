@@ -1,6 +1,7 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
+import { Observable, map } from 'rxjs';
+import { IProduct } from '../models/iproduct';
 
 @Injectable({
   providedIn: 'root',
@@ -8,13 +9,13 @@ import { map } from 'rxjs';
 export class Product {
   private http = inject(HttpClient);
 
-  getProducts() {
+  getProducts(): Observable<IProduct[]> {
     return this.http
-      .get<{ products: any[] }>('https://dummyjson.com/products?limit=0')
+      .get<{ products: IProduct[] }>('https://dummyjson.com/products?limit=0')
       .pipe(map((resposta) => resposta.products));
   }
 
-  getProductById(id: number) {
-    return this.http.get<any>(`https://dummyjson.com/products/${id}`);
+  getProductById(id: number): Observable<IProduct> {
+    return this.http.get<IProduct>(`https://dummyjson.com/products/${id}`);
   }
 }

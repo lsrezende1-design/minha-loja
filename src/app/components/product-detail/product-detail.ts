@@ -3,12 +3,12 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../services/product';
 import { Store } from '@ngrx/store';
 import { adicionarProduto } from '../../store/cart/cart.actions';
-import { CurrencyPipe, DecimalPipe } from '@angular/common';
+import { CurrencyPipe, DecimalPipe, UpperCasePipe } from '@angular/common';
 import { DiscountPipe } from '../../pipes/discount-pipe';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CurrencyPipe, DecimalPipe, DiscountPipe, RouterLink],
+  imports: [CurrencyPipe, DecimalPipe, UpperCasePipe, DiscountPipe, RouterLink],
   templateUrl: './product-detail.html',
   styleUrl: './product-detail.css',
 })
