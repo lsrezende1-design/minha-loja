@@ -138,7 +138,7 @@ Antes de começar, garante que você tem as seguintes ferramentas instaladas:
 
 ## Executando os Testes
 
-Para rodar a suíte de testes unitários via Karma:
+Para rodar a suíte de testes unitários:
 
 ```bash
 ng test
