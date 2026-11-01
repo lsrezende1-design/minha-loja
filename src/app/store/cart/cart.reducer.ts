@@ -5,17 +5,45 @@ export interface CartState {
   itens: any[];
 }
 
-export const estadoInicial: CartState = {
-  itens: [],
-};
+const STORAGE_KEY = 'minha_loja_carrinho';
+
+function carregarEstadoInicial(): CartState {
+  if (typeof window !== 'undefined') {
+    const salvo = localStorage.getItem(STORAGE_KEY);
+    if (salvo) {
+      try {
+        return { itens: JSON.parse(salvo) };
+      } catch (e) {
+        console.error('Erro ao fazer parse do carrinho do localStorage', e);
+      }
+    }
+  }
+  return { itens: [] };
+}
+
+function salvarEstado(estado: CartState): CartState {
+  if (typeof window !== 'undefined') {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(estado.itens));
+    } catch (e) {
+      console.error('Erro ao salvar o carrinho no localStorage', e);
+    }
+  }
+  return estado;
+}
+
+export const estadoInicial: CartState = carregarEstadoInicial();
 
 export const cartReducer = createReducer(
   estadoInicial,
 
-  on(adicionarProduto, (estado, { produto }) => ({
-    ...estado,
-    itens: [...estado.itens, produto],
-  })),
+  on(adicionarProduto, (estado, { produto }) => {
+    const novoEstado = {
+      ...estado,
+      itens: [...estado.itens, produto],
+    };
+    return salvarEstado(novoEstado);
+  }),
 
   on(removerProduto, (estado, { id }) => {
     const indice = estado.itens.map((produto) => produto.id).lastIndexOf(id);
@@ -24,14 +52,18 @@ export const cartReducer = createReducer(
       return estado;
     }
 
-    return {
+    const novoEstado = {
       ...estado,
       itens: estado.itens.filter((_, i) => i !== indice),
     };
+    return salvarEstado(novoEstado);
   }),
 
-  on(clearCart, (estado) => ({
-    ...estado,
-    itens: [],
-  })),
+  on(clearCart, (estado) => {
+    const novoEstado = {
+      ...estado,
+      itens: [],
+    };
+    return salvarEstado(novoEstado);
+  }),
 );
