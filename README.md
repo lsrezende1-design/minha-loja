@@ -6,11 +6,21 @@ O objetivo central da aplicação é implementar uma loja virtual moderna, utili
 
 ---
 
-## Autores / Integrantes
+## Autores e Divisão de Responsabilidades
 
-- **Aluno X**
-- **Aluno Y**
-- **Aluno Z**
+A concepção, os testes do sistema e a validação final das integrações foram realizadas de forma conjunta e colaborativa pela equipe. As frentes principais de trabalho foram organizadas da seguinte forma:
+
+- **Lilian Siqueira Rezende**
+
+  Responsável por liderar a arquitetura técnica do projeto e a configuração do ecossistema Angular (`app.config.ts` e `app.routes.ts`), conduzindo o desenvolvimento da lógica dos modelos de dados (`iproduct.ts`) e a criação central do serviço de produtos (`product.ts`), além de coordenar a implementação dos componentes da vitrine e página de detalhes (`product-card` e `product-detail`) e a integração de ponta a ponta entre as rotas e serviços de dados da aplicação.
+
+- **Fabyo Luiz Crizóstomo Kock**
+
+  Responsável pela implementação da lógica do gerenciamento de estado do carrinho de compras na pasta `store/cart/`, pela criação das ações (`cart.actions.ts`), reducers (`cart.reducer.ts`) e seletores (`cart.selectors.ts`) do estado reativo, pelo desenvolvimento, dentre outras coisas, da persistência do carrinho e sua integração ao serviço (`cart.ts`), além da construção da página de checkout (`pages/checkout/`), conectando a lista de compras ao fluxo de finalização.
+
+- **Werlleyn Douglas Assunção Santos**
+
+  Responsável pelo desenvolvimento do pipe customizado de desconto (`pipes/discount-pipe.ts`) e sua aplicação visual na loja, pelo apoio na estruturação da grade principal de listagem de produtos (`product-list/`), pela elaboração dos arquivos de testes unitários (`.spec.ts`) dos serviços e componentes do projeto, além do alinhamento das estilizações globais (`styles.css`) e revisão dos arquivos de configuração da aplicação.
 
 ---
 
