@@ -11,6 +11,8 @@ import {
   selecionarTotal,
 } from '../../store/cart/cart.selectors';
 import { DiscountPipe } from '../../pipes/discount-pipe';
+
+
 @Component({
   imports: [CommonModule, ReactiveFormsModule, RouterLink, DiscountPipe],
   selector: 'app-checkout',
